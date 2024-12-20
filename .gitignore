@@ -1,6 +1,4 @@
 # NetBeans specific #
-.idea
-.settings
 nbproject/private/
 build/
 nbbuild/
@@ -11,6 +9,10 @@ nb-configuration.xml
 test/
 build.xml
 ShopBanDoDienTu.iml
+.idea
+.settings
+*.xml
+*.properties
 
 # Class Files #
 *.class

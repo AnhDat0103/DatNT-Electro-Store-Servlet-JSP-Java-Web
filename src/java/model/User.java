@@ -9,15 +9,7 @@ package model;
  * @author DAT
  */
 public class User {
-    
-    private int id;
-    private String email;
-    private String fullName;
-    private String password;
-    private String telephone;
-    private String address;
-    
-    
+  
     
     
     
