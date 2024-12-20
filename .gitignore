@@ -1,0 +1,22 @@
+# NetBeans specific #
+.idea
+.settings
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml    
+test/
+build.xml
+ShopBanDoDienTu.iml
+
+# Class Files #
+*.class
+.project
+.classpath
+# Package Files #
+*.jar
+*.war
+*.ear
