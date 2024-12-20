@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%--<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>--%>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -44,181 +45,15 @@
     </head>
 	<body>
 		<!-- HEADER -->
-		<header>
-			<!-- TOP HEADER -->
-			<div id="top-header">
-				<div class="container">
-					<ul class="header-links pull-left">
-						<li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
-						<li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-						<li><a href="#"><i class="fa fa-map-marker"></i> Hải Dương, Việt Nam</a></li>
-					</ul>
-					<ul class="header-links pull-right">
-						<li><a href="#"><i class="fa fa-dollar"></i> VNĐ</a></li>
-						<li><a href="#"><i class="fa fa-user-o"></i> Tài khoản</a></li>
-					</ul>
-				</div>
-			</div>
-			<!-- /TOP HEADER -->
-
-			<!-- MAIN HEADER -->
-			<div id="header">
-				<!-- container -->
-				<div class="container">
-					<!-- row -->
-					<div class="d-flex justify-content-between row">
-						<!-- LOGO -->
-						<div class="col-md-6">
-							<div class="header-logo">
-								<a href="#" class="logo">
-									<img src="./resources/client/img/logo.png" alt="">
-								</a>
-							</div>
-						</div>
-						<!-- /LOGO -->
-
-
-						<!-- ACCOUNT -->
-						<div class="col-md-6 clearfix">
-							<div class="header-ctn">
-
-								<!-- Cart -->
-								<div class="dropdown">
-									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-										<i class="fa fa-shopping-cart"></i>
-										<span>Giỏ hàng</span>
-										<div class="qty">3</div>
-									</a>
-									<div class="cart-dropdown">
-										<div class="cart-list">
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="./resources/client/img/product01.png" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
-
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="./resources/client/img/product02.png" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
-										</div>
-										<div class="cart-summary">
-											<small>3 Item(s) selected</small>
-											<h5>SUBTOTAL: $2940.00</h5>
-										</div>
-										<div class="cart-btns">
-											<a href="#">View Cart</a>
-											<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
-										</div>
-									</div>
-								</div>
-								<!-- /Cart -->
-
-								<!-- Menu Toogle -->
-								<div class="menu-toggle">
-									<a href="#">
-										<i class="fa fa-bars"></i>
-										<span>Menu</span>
-									</a>
-								</div>
-								<!-- /Menu Toogle -->
-							</div>
-						</div>
-						<!-- /ACCOUNT -->
-					</div>
-					<!-- row -->
-				</div>
-				<!-- container -->
-			</div>
-			<!-- /MAIN HEADER -->
-		</header>
+                <%@include file="layout/header.jsp" %>
 		<!-- /HEADER -->
 
 		<!-- NAVIGATION -->
-		<nav id="navigation">
-			<!-- container -->
-			<div class="container">
-				<!-- responsive-nav -->
-				<div id="responsive-nav">
-					<!-- NAV -->
-					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="#">Trang chủ</a></li>
-						<li><a href="#">Bán Chạy</a></li>
-						<li><a href="#">Laptops</a></li>
-						<li><a href="#">Máy ảnh</a></li>
-						<li><a href="#">Phụ kiện</a></li>
-					</ul>
-					<!-- /NAV -->
-				</div>
-				<!-- /responsive-nav -->
-			</div>
-			<!-- /container -->
-		</nav>
+                <%@include file="layout/nav.jsp" %>  
 		<!-- /NAVIGATION -->
 
 		<!-- SECTION -->
-		<div class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<!-- shop -->
-					<div class="col-md-4 col-xs-6">
-						<div class="shop">
-							<div class="shop-img">
-								<img src="./resources/client/img/shop01.png" alt="">
-							</div>
-							<div class="shop-body">
-								<h3>Khu vực<br>Laptop</h3>
-								<a href="#" class="cta-btn">Mua sắm <i class="fa fa-arrow-circle-right"></i></a>
-							</div>
-						</div>
-					</div>
-					<!-- /shop -->
-
-					<!-- shop -->
-					<div class="col-md-4 col-xs-6">
-						<div class="shop">
-							<div class="shop-img">
-								<img src="./resources/client/img/shop03.png" alt="">
-							</div>
-							<div class="shop-body">
-								<h3>Khu vực<br>Phụ kiện</h3>
-								<a href="#" class="cta-btn">Mua sắm <i class="fa fa-arrow-circle-right"></i></a>
-							</div>
-						</div>
-					</div>
-					<!-- /shop -->
-
-					<!-- shop -->
-					<div class="col-md-4 col-xs-6">
-						<div class="shop">
-							<div class="shop-img">
-								<img src="./resources/client/img/shop02.png" alt="">
-							</div>
-							<div class="shop-body">
-								<h3>Khu vực<br>Máy ảnh</h3>
-								<a href="#" class="cta-btn">Mua sắm <i class="fa fa-arrow-circle-right"></i></a>
-							</div>
-						</div>
-					</div>
-					<!-- /shop -->
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
+                <%@include file="layout/banner.jsp" %>  
 		<!-- /SECTION -->
 
 		<!-- SECTION -->
@@ -605,68 +440,7 @@
 
 
 		<!-- FOOTER -->
-		<footer id="footer">
-			<!-- top footer -->
-			<div class="section">
-				<!-- container -->
-				<div class="container">
-					<!-- row -->
-					<div class="row">
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">THÔNG TIN VỀ CHÚNG TÔI</h3>
-								<ul class="footer-links">
-									<li><a href="#"><i class="fa fa-map-marker"></i>Hải Dương - Việt Nam</a></li>
-									<li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
-									<li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
-								</ul>
-							</div>
-						</div>
-
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">MẶT HÀNG</h3>
-								<ul class="footer-links">
-									<li><a href="#">Sản phẩm bán chạy</a></li>
-									<li><a href="#">Laptops</a></li>
-									<li><a href="#">Máy ảnh</a></li>
-									<li><a href="#">Phụ kiện</a></li>
-								</ul>
-							</div>
-						</div>
-
-						<div class="clearfix visible-xs"></div>
-
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">THÔNG TIN</h3>
-								<ul class="footer-links">
-									<li><a href="#">Thông tin về chúng tôi</a></li>
-									<li><a href="#">Kết nối</a></li>
-									<li><a href="#">Bảo mật</a></li>
-									<li><a href="#">Điều khoản & H  ợp đồng</a></li>
-								</ul>
-							</div>
-						</div>
-
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">THIẾT BỊ</h3>
-								<ul class="footer-links">
-									<li><a href="#">Tài khoản</a></li>
-									<li><a href="#">Giỏ hàng</a></li>
-									<li><a href="#">Yêu thích</a></li>
-									<li><a href="#">Trợ giúp</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<!-- /row -->
-				</div>
-				<!-- /container -->
-			</div>
-			<!-- /top footer -->
-		</footer>
+                 <%@include file="layout/footer.jsp" %> 
 		<!-- /FOOTER -->
 
 		<!-- jQuery Plugins -->
