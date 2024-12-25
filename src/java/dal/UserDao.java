@@ -24,7 +24,30 @@ public class UserDao extends DBConnect implements Dao<User> {
 
     @Override
     public void save(User t) {
-
+        String sql = "INSERT INTO [dbo].[Users]\n"
+                + "           ([full_name]\n"
+                + "           ,[email]\n"
+                + "           ,[password]\n"
+                + "           ,[telephone]\n"
+                + "           ,[address]\n"
+                + "           ,[role_id])\n"
+                + "     VALUES\n"
+                + "           (?,?,?,?,?,?)";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, t.getFullName());
+            ps.setString(2, t.getEmail());
+            ps.setString(3, t.getPassword());
+            ps.setString(4, t.getTelephone());
+            ps.setString(5, t.getAddress());
+            ps.setInt(6, t.getRole().getRoleId());
+            ps.executeUpdate();
+            ps.close();
+            connection.close();
+        } catch (SQLException e) {
+             e.printStackTrace(); 
+        }
     }
 
     @Override
@@ -55,6 +78,7 @@ public class UserDao extends DBConnect implements Dao<User> {
                 users.add(user);
             }
             connection.close();
+            ps.close();
         } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
         }
