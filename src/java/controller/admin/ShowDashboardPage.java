@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller;
+package controller.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author DAT
  */
-@WebServlet(name="ShowHomePage", urlPatterns={"/trang-chu"})
-public class ShowHomePage extends HttpServlet {
+@WebServlet(name="ShowDashboardPage", urlPatterns={"/admin/trang-quan-tri"})
+public class ShowDashboardPage extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,10 +35,10 @@ public class ShowHomePage extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ShowHomePage</title>");  
+            out.println("<title>Servlet ShowDashboardPage</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ShowHomePage at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ShowDashboardPage at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -55,7 +55,7 @@ public class ShowHomePage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("homepage.jsp").forward(request, response);
+        request.getRequestDispatcher("/dashboard/dashboard.jsp").forward(request, response);
     } 
 
     /** 

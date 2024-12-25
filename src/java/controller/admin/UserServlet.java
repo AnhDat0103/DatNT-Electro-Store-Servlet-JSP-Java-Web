@@ -3,23 +3,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller;
+package controller.admin;
 
+import dal.UserDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.User;
 
 /**
  *
  * @author DAT
  */
-@WebServlet(name="ShowHomePage", urlPatterns={"/trang-chu"})
-public class ShowHomePage extends HttpServlet {
+@WebServlet(name="UserServlet", urlPatterns={"/danh-sach-khach-hang"})
+public class UserServlet extends HttpServlet {
    
+     private final UserDao userDao = new UserDao();
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -35,10 +39,10 @@ public class ShowHomePage extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ShowHomePage</title>");  
+            out.println("<title>Servlet UserServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ShowHomePage at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet UserServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -55,7 +59,15 @@ public class ShowHomePage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("homepage.jsp").forward(request, response);
+        List<User> users = userDao.findAll();
+        String ms = null;
+        if(users == null) {
+            ms = "danh sach trong";
+        }
+        request.setAttribute("ms", ms);
+        request.setAttribute("users", users);
+        request.getRequestDispatcher("danhsachkhachang.jsp").forward(request, response);
+       
     } 
 
     /** 
