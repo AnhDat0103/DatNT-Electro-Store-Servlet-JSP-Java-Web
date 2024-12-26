@@ -36,6 +36,7 @@
                                                 <input class="form-control" id="inputPassword" type="password" placeholder="Password" name="password" />
                                                 <label for="inputPassword">Mật khẩu</label>
                                             </div>
+                                            <div style="color:red"; >${requestScope.errorMessage}</div>
 <!--                                            <div class="form-check mb-3">
                                                 <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
                                                 <label class="form-check-label" for="inputRememberPassword">Remember Password</label>

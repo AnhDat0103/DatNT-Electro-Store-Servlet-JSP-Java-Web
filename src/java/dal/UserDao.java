@@ -94,5 +94,29 @@ public class UserDao extends DBConnect implements Dao<User> {
     public void delete(User t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
+    public User findUserByEmailAndPassword(String email, String password){
+        User currentUser = null;
+        String sql = "SELECT * FROM Users WHERE email = ? AND password = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, email);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                currentUser = new User(rs.getInt("user_id"),
+                        rs.getString("full_name"),
+                        rs.getString("email"), 
+                        rs.getString("password"),
+                        rs.getString("telephone"), 
+                        rs.getString("address"), 
+                        roleDao.findRoleById(rs.getInt("role_id")));
+                connection.close();
+                return currentUser;
+            }
+        } catch (SQLException e) {
+        }
+        return null;
+    }
 
 }

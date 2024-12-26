@@ -5,6 +5,7 @@
 
 package controller;
 
+import dal.UserDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,6 +13,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.User;
 
 /**
  *
@@ -68,7 +71,19 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        HttpSession session = request.getSession();
+        UserDao userDao = new UserDao();
+        User currentUser = userDao.findUserByEmailAndPassword(email, password);
+        if(currentUser != null){
+            request.setAttribute("user", currentUser);
+            session.setAttribute("currentUser", currentUser);
+            request.getRequestDispatcher("homepage.jsp").forward(request, response);
+        } else {
+            request.setAttribute("errorMessage", "Tài khoản hoặc mật khẩu không chính xác!");
+            request.getRequestDispatcher("/dashboard/auth/login.jsp").forward(request, response);
+        }
     }
 
     /** 

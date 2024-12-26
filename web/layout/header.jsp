@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 		<header>
 			<!-- TOP HEADER -->
 			<div id="top-header">
@@ -14,10 +15,12 @@
 						<li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
 						<li><a href="#"><i class="fa fa-map-marker"></i> Hải Dương, Việt Nam</a></li>
 					</ul>
+                                        <c:if test="${not empty sessionScope.currentUser}">
 					<ul class="header-links pull-right">
 						<li><a href="#"><i class="fa fa-dollar"></i> VNĐ</a></li>
-						<li><a href="#"><i class="fa fa-user-o"></i> Tài khoản</a></li>
+                                                <li><a href="#"><i class="fa fa-user-o"></i> ${sessionScope.currentUser.fullName}</a></li>
 					</ul>
+                                        </c:if>
 				</div>
 			</div>
 			<!-- /TOP HEADER -->
@@ -42,8 +45,8 @@
 						<!-- ACCOUNT -->
 						<div class="col-md-6 clearfix">
 							<div class="header-ctn">
-
-								<!-- Cart -->
+                                                            <c:if test="${not empty sessionScope.currentUser}">
+                                                                								<!-- Cart -->
 								<div class="dropdown">
 									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
@@ -85,6 +88,8 @@
 									</div>
 								</div>
 								<!-- /Cart -->
+
+                                                            </c:if>
 
 								<!-- Menu Toogle -->
 								<div class="menu-toggle">
