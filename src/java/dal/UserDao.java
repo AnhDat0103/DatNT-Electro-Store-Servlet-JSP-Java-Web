@@ -115,6 +115,8 @@ public class UserDao extends DBConnect implements Dao<User> {
                 return currentUser;
             }
         } catch (SQLException e) {
+            e.printStackTrace(); 
+
         }
         return null;
     }

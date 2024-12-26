@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="#">
+            <a class="navbar-brand ps-3" href="http://localhost:8080/electro-store/admin/trang-quan-tri">
                 <img src="../resources/client/img/logo.png" alt="alt"/>
             </a>
             <!-- Sidebar Toggle-->

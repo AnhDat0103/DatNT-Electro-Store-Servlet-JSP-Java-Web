@@ -15,6 +15,13 @@
 						<li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
 						<li><a href="#"><i class="fa fa-map-marker"></i> Hải Dương, Việt Nam</a></li>
 					</ul>
+                                        <c:if test="${empty sessionScope.currentUser}">
+                                            <ul class="header-links pull-right">
+						<li><a href="http://localhost:8080/electro-store/dang-ky"><i></i>Đăng ký</a></li>
+                                                <li style="color:white;"> |</li>
+                                                <li><a href="http://localhost:8080/electro-store/dang-nhap"><i></i>Đăng nhập</a></li>
+					</ul>
+                                        </c:if>
                                         <c:if test="${not empty sessionScope.currentUser}">
 					<ul class="header-links pull-right">
 						<li><a href="#"><i class="fa fa-dollar"></i> VNĐ</a></li>
@@ -45,16 +52,23 @@
 						<!-- ACCOUNT -->
 						<div class="col-md-6 clearfix">
 							<div class="header-ctn">
-                                                            <c:if test="${not empty sessionScope.currentUser}">
                                                                 								<!-- Cart -->
 								<div class="dropdown">
 									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Giỏ hàng</span>
-										<div class="qty">3</div>
+                                                                                    <c:if test="${not empty sessionScope.currentUser}">
+                                                                                    <div class="qty">3</div>
+                                                                                    </c:if>
 									</a>
 									<div class="cart-dropdown">
-										<div class="cart-list">
+                                                                            <c:if test="${empty sessionScope.currentUser}">
+                                                                                <div class="cart-empty">
+                                                                                    <img style="width:100%;"  src="./resources/client/img/cart-empty.png" alt="">
+                                                                                </div>
+                                                                                <h5 style="color:#1E90FF;">Chưa có sản phẩm trong giỏ hàng</h5>
+                                                                            </c:if>	
+                                                                            <c:if test="${not empty sessionScope.currentUser}">									<div class="cart-list">
 											<div class="product-widget">
 												<div class="product-img">
 													<img src="./resources/client/img/product01.png" alt="">
@@ -85,12 +99,11 @@
 											<a href="#">View Cart</a>
 											<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
 										</div>
+                                                                            </c:if>
+
 									</div>
 								</div>
 								<!-- /Cart -->
-
-                                                            </c:if>
-
 								<!-- Menu Toogle -->
 								<div class="menu-toggle">
 									<a href="#">
