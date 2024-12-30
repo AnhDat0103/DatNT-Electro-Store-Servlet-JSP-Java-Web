@@ -55,5 +55,22 @@ public class RoleDao extends DBConnect implements Dao<Role>{
         
         return role;
     }
+
+    int findRoleByName(String roleName) {
+        String sql  = "SELECT role_id FROM Roles WHERE name = ?";
+        int roleID;
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, roleName);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                roleID = rs.getInt("role_id");
+                return roleID;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
     
 }

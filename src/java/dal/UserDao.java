@@ -49,6 +49,28 @@ public class UserDao extends DBConnect implements Dao<User> {
              e.printStackTrace(); 
         }
     }
+    public void saveForRegister(User t) {
+        String sql = "INSERT INTO [dbo].[Users]\n"
+                + "           ([full_name]\n"
+                + "           ,[email]\n"
+                + "           ,[password]\n"
+                + "           ,[role_id])\n"
+                + "     VALUES\n"
+                + "           (?,?,?,?)";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, t.getFullName());
+            ps.setString(2, t.getEmail());
+            ps.setString(3, t.getPassword());
+            ps.setInt(4, roleDao.findRoleByName("USER"));
+            ps.executeUpdate();
+            ps.close();
+            connection.close();
+        } catch (SQLException e) {
+             e.printStackTrace(); 
+        }
+    }
 
     @Override
     public List<User> findAll() {
@@ -117,6 +139,29 @@ public class UserDao extends DBConnect implements Dao<User> {
         } catch (SQLException e) {
             e.printStackTrace(); 
 
+        }
+        return null;
+    }
+    
+    public User findUserByEmail(String email){
+        User currentUser = null;
+        String sql = "SELECT * FROM Users WHERE email = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                currentUser = new User(rs.getInt("user_id"),
+                        rs.getString("full_name"),
+                        rs.getString("email"), 
+                        rs.getString("password"),
+                        rs.getString("telephone"), 
+                        rs.getString("address"), 
+                        roleDao.findRoleById(rs.getInt("role_id")));
+                return currentUser;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); 
         }
         return null;
     }

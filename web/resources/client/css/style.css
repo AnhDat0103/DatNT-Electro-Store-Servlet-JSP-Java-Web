@@ -427,7 +427,7 @@ textarea.input {
 }
 
 .header-links li a {
-  color: #FFF;
+    color: #FFF ;
 }
 
 .header-links li a:hover {
@@ -2188,4 +2188,13 @@ textarea.input {
     float: none;
     margin-top: 10px;
   }
+}
+
+.header-links .dropdown-menu {
+    background-color: #1E1F29;
+}
+
+.header-links .dropdown-menu .dropdown-item {
+    display: block;
+    margin-left: 10px;
 }
