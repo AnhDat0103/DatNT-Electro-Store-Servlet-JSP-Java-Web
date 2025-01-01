@@ -21,16 +21,19 @@
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
-        <%@include file="./layout/header.jsp" %>
+        <%@include file="../layout/header.jsp" %>
         <div id="layoutSidenav">
-            <%@include file="./layout/navigation.jsp" %>
+            <%@include file="../layout/navigation.jsp" %>
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Quản lý sản phẩm</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Danh sách sản phẩm</li>
-                        </ol>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <ol class="breadcrumb mb-4">
+                                <li class="breadcrumb-item active">Danh sách sản phẩm</li>
+                            </ol>
+                            <a class="btn btn-primary" href="http://localhost:8080/electro-store/admin/tao-moi-san-pham" role="button">Tạo sản phẩm mới</a>
+                        </div>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
@@ -56,11 +59,11 @@
                                                 <td >${p.name}</td>
                                                 <td >${p.quantity}</td>
                                                 <td ><fmt:formatNumber type="number">${p.price}</fmt:formatNumber> đ</td>
-                                                <td>
+                                                    <td>
                                                         <a href="#" class="btn btn-info">Xem chi tiết</a>
                                                         <a href="#"" class="btn btn-warning">Cập nhật</a>
                                                         <a href="#" class="btn btn-danger">Xóa sản phẩm</a>
-                                                </td>
+                                                    </td>
                                                 </tr>
                                         </c:forEach>
                                     </tbody>
@@ -69,7 +72,7 @@
                         </div>
                     </div>
                 </main>
-                <%@include file="./layout/footer.jsp" %>
+                <%@include file="../layout/footer.jsp" %>
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

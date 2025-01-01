@@ -5,7 +5,7 @@
 
 package controller.admin;
 
-import dal.ProductDao;
+import dal.BrandDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -14,15 +14,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Product;
+import model.Brand;
 
 /**
  *
  * @author DAT
  */
-@WebServlet(name="ProductServlet", urlPatterns={"/admin/quan-ly-hang-hoa"})
-public class ProductServlet extends HttpServlet {
+@WebServlet(name="CreateProduct", urlPatterns={"/admin/tao-moi-san-pham"})
+public class CreateProduct extends HttpServlet {
    
+    private final BrandDao bd = new BrandDao();
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -38,10 +39,10 @@ public class ProductServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ProductServlet</title>");  
+            out.println("<title>Servlet CreateProduct</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ProductServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet CreateProduct at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,14 +59,11 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        ProductDao pd = new ProductDao();
-        List<Product> products = pd.findAll();
-        if(products.isEmpty()) {
-            request.setAttribute("errorMessage", "Không có sản phẩm nào trong kho");
-        }else{
-            request.setAttribute("products", products);
+        List<Brand> bs = bd.findAll();
+        if(!bs.isEmpty()) {
+            request.setAttribute("brands", bs);
         }
-        request.getRequestDispatcher("/dashboard/product/show.jsp").forward(request, response);
+        request.getRequestDispatcher("/dashboard/product/create.jsp").forward(request, response);
     } 
 
     /** 
