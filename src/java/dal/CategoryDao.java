@@ -36,7 +36,7 @@ public class CategoryDao extends DBConnect implements Dao<Category>{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    Category findCategoryById(int id) {
+    public Category findCategoryById(int id) {
         String sql = "SELECT * FROM Product_Categories WHERE category_id = ?";
         Category c = null;
         try {

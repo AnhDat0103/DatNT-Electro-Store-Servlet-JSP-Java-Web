@@ -51,31 +51,61 @@
                                 <div class="col-lg-7">
                                     <div class="card border-1 rounded-lg mt-5">
                                         <div class="card-body">
-                                            <form action="/admin/tao-moi-san-pham" method="POST">
+                                            <form action="/electro-store/admin/tao-moi-san-pham" method="POST" enctype="multipart/form-data">
                                                 <div class="mb-3">
                                                     <label for="exampleFormControlInput1" class="form-label">Tên sản phẩm:</label>
-                                                    <input type="text" class="form-control" id="exampleFormControlInput1" name="name">
+                                                    <input type="text" class="form-control ${not empty nameError ? 'is-invalid' : ''}" id="exampleFormControlInput1" name="name">
+                                                    <c:if test="${not empty nameError}">
+                                                        <div class="invalid-feedback">
+                                                            <c:out value="${nameError}" />
+                                                        </div>
+                                                    </c:if>
                                                 </div>
                                                 <div class="row mb-3">
                                                     <div class="col">
                                                         <label class="form-label">Giá cả (VNĐ):</label>
-                                                        <input type="text" class="form-control" name="price">
+                                                        <input type="number" class="form-control ${not empty emptyError ? 'is-invalid' : ''} ${not empty errorPrice ? 'is-invalid' : ''}" name="price">
+                                                        <c:if test="${not empty emptyError}">
+                                                            <div class="invalid-feedback">
+                                                                <c:out value="${emptyError}" />
+                                                            </div>
+                                                        </c:if>
+                                                        <c:if test="${not empty errorPrice}">
+                                                            <div class="invalid-feedback">
+                                                                <c:out value="${errorPrice}" />
+                                                            </div>
+                                                        </c:if>
                                                     </div>
                                                     <div class="col">
                                                         <label class="form-label">Số lượng:</label>
-                                                        <input type="number" class="form-control" name="quantity" min="1">
+                                                        <input type="number" class="form-control ${not empty emptyError ? 'is-invalid' : ''} ${not empty errorQuantity ? 'is-invalid' : ''}" name="quantity">
+                                                        <c:if test="${not empty emptyError}">
+                                                            <div class="invalid-feedback">
+                                                                <c:out value="${emptyError}" />
+                                                            </div>
+                                                        </c:if>
+                                                        <c:if test="${not empty errorQuantity}">
+                                                            <div class="invalid-feedback">
+                                                                <c:out value="${errorQuantity}" />
+                                                            </div>
+                                                        </c:if>
                                                     </div>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label">Miêu tả chi tiết sản phẩm:</label>
-                                                    <textarea class="form-control" placeholder="Hãy nêu sự nổi bật của sản phẩm tại đây" id="floatingTextarea2" style="height: 100px"></textarea>
+                                                    <textarea class="form-control ${not empty desError ? 'is-invalid' : ''}" placeholder="Hãy nêu sự nổi bật của sản phẩm tại đây" id="floatingTextarea2" style="height: 100px" name="description"></textarea>
+                                                    <c:if test="${not empty desError}">
+                                                        <div class="invalid-feedback">
+                                                            <c:out value="${desError}" />
+                                                        </div>
+                                                    </c:if>
                                                 </div>
                                                 <div class="mb-3 row">
                                                     <div class="col">
                                                         <label class="form-label">Hãng sản phẩm:</label>
-                                                        <select class="form-select" aria-label="Default select example">
-                                                            <c:forEach items="${brands}" var="brand">
-                                                                <option value="${brand.id}">${brand.name}</option>
+                                                        <select class="form-select" aria-label="Default select example" name="brand">
+                                                            <c:forEach items="${sessionScope.brands}" var="brand">
+                                                                <option value="${brand.id}" >${brand.name}</option>
                                                             </c:forEach>
                                                         </select>
                                                     </div>
@@ -83,7 +113,7 @@
                                                         <label class="form-label">Loại sản phẩm:</label>
                                                         <div class="mt-1">
                                                             <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked    >
                                                                 <label class="form-check-label" for="inlineRadio1">Laptop</label>
                                                             </div>
                                                             <div class="form-check form-check-inline">
@@ -96,17 +126,24 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="m-3">
-                                                        <label for="formFile" class="form-label">Ảnh sản phẩm:</label>
-                                                        <input class="form-control" type="file"  id="avatarFile"  accept=".png, .jpg, .jpeg">
-                                                    </div>
-                                                    <div class="col-12 mb-3 d-flex justify-content-center">
-                                                        <img style="max-height: 250px; display: none;" alt="avatar preview"
-                                                             id="avatarPreview" />
-                                                    </div>
+
                                                 </div>
+                                                <div class="mb-3">
+                                                    <label for="formFile" class="form-label">Ảnh sản phẩm:</label>
+                                                    <input class="form-control ${not empty imgError ? 'is-invalid' : ''}" type="file"  id="avatarFile"  accept=".png, .jpg, .jpeg" name="multiPartServlet" >
+                                                    <c:if test="${not empty imgError}">
+                                                        <div class="invalid-feedback">
+                                                            <c:out value="${imgError}" />
+                                                        </div>
+                                                    </c:if>
+                                                </div>
+                                                <div class="col-12 mb-3 d-flex justify-content-center">
+                                                    <img style="max-height: 250px; display: none;" alt="avatar preview"
+                                                         id="avatarPreview" />
+                                                </div>
+                                                <div style="color:green;">${requestScope.successMessage}</div>
                                                 <div class="d-flex justify-content-between">
-                                                    <button class="btn btn-primary" type="submit">Tạo sản phẩm</button>
+                                                    <input class="btn btn-primary" type="submit" value="Tạo sản phẩm">
                                                     <a class="btn btn-secondary" href="http://localhost:8080/electro-store/admin/quan-ly-hang-hoa" role="button">Hủy bỏ</a>
                                                 </div>
 

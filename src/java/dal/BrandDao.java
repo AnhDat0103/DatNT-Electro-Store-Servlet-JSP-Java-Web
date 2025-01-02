@@ -59,7 +59,6 @@ public class BrandDao extends DBConnect implements Dao<Brand> {
             if (rs.next()) {
                 brand = new Brand(rs.getInt("brand_id"), rs.getString("name"), rs.getString("country"));
             }
-            connection.close();
         } catch (SQLException e) {
         }
         return brand;
