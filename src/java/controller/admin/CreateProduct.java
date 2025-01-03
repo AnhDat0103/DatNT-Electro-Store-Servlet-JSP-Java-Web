@@ -12,8 +12,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -21,26 +19,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import model.Brand;
 import model.Product;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
 
 /**
  *
  * @author DAT
  */
 @WebServlet(name = "CreateProduct", urlPatterns = {"/admin/tao-moi-san-pham"})
-@MultipartConfig
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+    maxFileSize = 1024 * 1024 * 50, // 50MB
+    maxRequestSize = 1024 * 1024 * 50)
 public class CreateProduct extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private static final int MEMORY_THRESHOLD = 1024 * 1024;
-    private static final long MAX_FILE_SIZE = 1024 * 1024 * 5;
-    private static final long MAX_REQUEST_SIZE = 1024 * 1024 * 5 * 5;
-    
+
     private final BrandDao bd = new BrandDao();
     private final CategoryDao cd = new CategoryDao();
     private final ProductDao pd = new ProductDao();
@@ -190,48 +185,30 @@ public class CreateProduct extends HttpServlet {
         return categoryId;
     }
 
-    public String uploadFile(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-        boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-        if (!isMultipart) {
-            return null;
-        }
-
-        DiskFileItemFactory factory = new DiskFileItemFactory();
-        factory.setSizeThreshold(MEMORY_THRESHOLD);
-        factory.setRepository(new File(System.getProperty("java.io.tmpdir")));
-
-        ServletFileUpload upload = new ServletFileUpload(factory);
-        upload.setFileSizeMax(MAX_FILE_SIZE);
-        upload.setSizeMax(MAX_REQUEST_SIZE);
-
-        String uploadPath = getServletContext().getRealPath("") + File.separator + "resources" + File.separator + "admin" + File.separator + "img";
+    public String uploadFile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String fileName;
+        String uploadPath = "D:\\DAT\\Documents\\FPT University\\Semester 04\\PRJ301\\Assignment-Project\\ShopBanDoDienTu\\web\\resources\\admin\\img";
         File uploadDir = new File(uploadPath);
-        if (!uploadDir.exists()) {
+        if(!uploadDir.exists()) {
             uploadDir.mkdir();
         }
-
-        String fileName = null;
-        List<FileItem> formItems = null;
-        try {
-            formItems = upload.parseRequest(request);
-        } catch (FileUploadException ex) {
-            Logger.getLogger(CreateProduct.class.getName()).log(Level.SEVERE, null, ex);
+        Part filePart = request.getPart("fileImage");
+        if(filePart != null && filePart.getSize() > 0) {
+            fileName = getFileName(filePart);
+            String filePath = uploadPath + File.separator + fileName;
+            filePart.write(filePath);
+            return fileName;
         }
-        if (formItems != null && !formItems.isEmpty()) {
-            for (FileItem item : formItems) {
-                if (!item.isFormField()) {
-                    fileName = new File(item.getName()).getName();
-                    String filePath = uploadPath + File.separator + fileName;
-                    File storeFile = new File(filePath);
-                    try {
-                        item.write(storeFile);
-                    } catch (Exception ex) {
-                        Logger.getLogger(CreateProduct.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
+        return null;
+    }
+
+    private String getFileName(Part filePart) {
+        for (String content : filePart.getHeader("content-disposition").split(";")) {
+            if(content.trim().startsWith("filename")){
+                return content.substring(content.indexOf("=") + 2, content.length() - 1);
             }
         }
-        return fileName;
+        return null;
     }
 
 }

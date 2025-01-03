@@ -130,7 +130,7 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="formFile" class="form-label">Ảnh sản phẩm:</label>
-                                                    <input class="form-control ${not empty imgError ? 'is-invalid' : ''}" type="file"  id="avatarFile"  accept=".png, .jpg, .jpeg" name="multiPartServlet" >
+                                                    <input class="form-control ${not empty imgError ? 'is-invalid' : ''}" type="file"  id="avatarFile"  accept=".png, .jpg, .jpeg" name="fileImage" >
                                                     <c:if test="${not empty imgError}">
                                                         <div class="invalid-feedback">
                                                             <c:out value="${imgError}" />
@@ -143,7 +143,7 @@
                                                 </div>
                                                 <div style="color:green;">${requestScope.successMessage}</div>
                                                 <div class="d-flex justify-content-between">
-                                                    <input class="btn btn-primary" type="submit" value="Tạo sản phẩm">
+                                                    <input class="btn btn-primary" type="submit" value="Tạo sản phẩm" formenctype="multipart/form-data" >
                                                     <a class="btn btn-secondary" href="http://localhost:8080/electro-store/admin/quan-ly-hang-hoa" role="button">Hủy bỏ</a>
                                                 </div>
 
