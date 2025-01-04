@@ -13,8 +13,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>404 Error - Electro Store</title>
-        <link href="css/styles.css" rel="stylesheet" />
+        <title>500 Error - Electro Store</title>
+        <link href="../resources/admin/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body>
@@ -23,13 +23,13 @@
                 <main>
                     <div class="container">
                         <div class="row justify-content-center">
-                            <div class="col-lg-6">
+                            <div class="col-lg-6">  
                                 <div class="text-center mt-4">
                                     <h1 class="display-1">500</h1>
-                                    <p class="lead">Internal Server Error</p>
-                                    <a href="index.html">
+                                    <p class="lead">Máy chủ hiện đang bảo trì. Hãy quay lại sau.</p>
+                                    <a href="/electro-store">
                                         <i class="fas fa-arrow-left me-1"></i>
-                                        Return to Dashboard
+                                        Trang chủ
                                     </a>
                                 </div>
                             </div>
@@ -53,6 +53,6 @@
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
+        <script src="../resources/admin/js/scripts.js"></script>
     </body>
 </html>

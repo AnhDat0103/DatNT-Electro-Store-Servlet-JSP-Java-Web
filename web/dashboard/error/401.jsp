@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>404 Error - Electro Store</title>
+        <title>401 Error - Electro Store</title>
         <link href="../resources/admin/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
@@ -26,11 +26,11 @@
                             <div class="col-lg-6">
                                 <div class="text-center mt-4">
                                     <h1 class="display-1">401</h1>
-                                    <p class="lead">Unauthorized</p>
-                                    <p>Access to this resource is denied.</p>
-                                    <a href="index.html">
+                                    <p class="lead">Trái phép</p>
+                                    <p>Tài khoản của bạn không có quyền truy cập. Quyền truy cập bị từ chối.</p>
+                                    <a href="/electro-store/dang-nhap">
                                         <i class="fas fa-arrow-left me-1"></i>
-                                        Return to Dashboard
+                                        Đi tới trang đăng nhập
                                     </a>
                                 </div>
                             </div>
