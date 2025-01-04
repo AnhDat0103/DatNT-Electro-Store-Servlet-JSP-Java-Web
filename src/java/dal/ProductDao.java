@@ -16,6 +16,9 @@ import model.Product;
  * @author DAT
  */
 public class ProductDao extends DBConnect implements Dao<Product> {
+    
+    private CategoryDao cd = new CategoryDao();
+    private BrandDao bd = new BrandDao();
 
     @Override
     public void save(Product t) {
@@ -50,8 +53,6 @@ public class ProductDao extends DBConnect implements Dao<Product> {
     public List<Product> findAll() {
         String sql = "SELECT * FROM Products";
         List<Product> products = new ArrayList<>();
-        BrandDao bd = new BrandDao();
-        CategoryDao cd = new CategoryDao();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -67,7 +68,6 @@ public class ProductDao extends DBConnect implements Dao<Product> {
                 p.setCategory(cd.findCategoryById(rs.getInt("category_id")));
                 products.add(p);
             }
-            connection.close();
         } catch (SQLException e) {
         }
         return products;
@@ -81,6 +81,27 @@ public class ProductDao extends DBConnect implements Dao<Product> {
     @Override
     public void delete(Product t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public Product findProductById(int productId) {
+        String sql = "SELECT * FROM Products WHERE product_id = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, productId);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()) {
+                Product p = new Product(rs.getInt("product_id"), rs.getString("name"),
+                        rs.getDouble("price"), rs.getInt("quantity"), 
+                        rs.getString("description"), rs.getString("image"), 
+                        cd.findCategoryById(rs.getInt("category_id")),
+                        bd.findBrandById(rs.getInt("brand_id"))
+                        );
+                return p;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }
