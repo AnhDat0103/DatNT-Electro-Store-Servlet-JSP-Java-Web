@@ -43,7 +43,6 @@ public class ProductDao extends DBConnect implements Dao<Product> {
             ps.setString(7, t.getImage());
             ps.executeUpdate();
             ps.close();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

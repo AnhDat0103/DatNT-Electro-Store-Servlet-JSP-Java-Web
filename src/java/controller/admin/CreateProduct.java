@@ -143,7 +143,6 @@ public class CreateProduct extends HttpServlet {
                 p.setBrand(bd.findBrandById(brandId));
                 p.setCategory(cd.findCategoryById(categoryId));
                 p.setImage(image);
-                uploadFile(request, response);
                 pd.save(p);
                 request.setAttribute("successMessage", "Sản phẩm đã được tạo thành công.");
                 request.getRequestDispatcher("/dashboard/product/create.jsp").forward(request, response);
@@ -196,6 +195,10 @@ public class CreateProduct extends HttpServlet {
         if(filePart != null && filePart.getSize() > 0) {
             fileName = getFileName(filePart);
             String filePath = uploadPath + File.separator + fileName;
+            File existingFile = new File(filePath);
+            if (existingFile.exists() && !existingFile.delete()) {
+                throw new IOException("Failed to overwrite existing file: " + filePath);
+            }
             filePart.write(filePath);
             return fileName;
         }
