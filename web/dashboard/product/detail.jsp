@@ -48,7 +48,18 @@
                                                         </div>
                                                         <div class="header-right">
                                                             Trạng thái: 
-                                                            <span class="status">Mới</span>
+
+                                                            <c:if test="${product.quantity > 0}">
+                                                                <span class="status">
+                                                                    <c:out value="Còn hàng"/>
+                                                                </span>
+                                                            </c:if>
+                                                            <c:if test="${product.quantity <= 0}">
+                                                                <span class="status bg-warning text-dark">
+                                                                    <c:out value="Hết hàng"/>
+                                                                </span>
+                                                            </c:if>
+
                                                         </div>
                                                     </div>
                                                     <div class="detail-body">

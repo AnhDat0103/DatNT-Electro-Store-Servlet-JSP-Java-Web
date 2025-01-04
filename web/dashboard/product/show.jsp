@@ -62,7 +62,7 @@
                                                     <td>
                                                         <a href="/electro-store/admin/chi-tiet-san-pham?ma-san-pham=${p.id}" class="btn btn-info">Xem chi tiết</a>
                                                         <a href="#"" class="btn btn-warning">Cập nhật</a>
-                                                        <a href="#" class="btn btn-danger">Xóa sản phẩm</a>
+                                                        <a href="/electro-store/admin/xac-nhan-xoa-san-pham?ma-san-pham=${p.id}" class="btn btn-danger">Xóa sản phẩm</a>
                                                     </td>
                                                 </tr>
                                         </c:forEach>

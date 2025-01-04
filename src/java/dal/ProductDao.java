@@ -104,4 +104,18 @@ public class ProductDao extends DBConnect implements Dao<Product> {
         return null;
     }
 
+    public boolean deleteProduct(int productId) {
+        boolean flag;
+        String sql = "DELETE FROM Products WHERE product_id = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, productId);
+            int rowsAffected  = ps.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            flag = false;
+        }
+        return flag;
+    }
+
 }
