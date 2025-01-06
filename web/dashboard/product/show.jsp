@@ -61,7 +61,7 @@
                                                 <td ><fmt:formatNumber type="number">${p.price}</fmt:formatNumber> đ</td>
                                                     <td>
                                                         <a href="/electro-store/admin/chi-tiet-san-pham?ma-san-pham=${p.id}" class="btn btn-info">Xem chi tiết</a>
-                                                        <a href="#"" class="btn btn-warning">Cập nhật</a>
+                                                        <a href="/electro-store/admin/cap-nhat-thong-tin-san-pham?ma-san-pham=${p.id}" class="btn btn-warning">Cập nhật</a>
                                                         <a href="/electro-store/admin/xac-nhan-xoa-san-pham?ma-san-pham=${p.id}" class="btn btn-danger">Xóa sản phẩm</a>
                                                     </td>
                                                 </tr>
