@@ -141,5 +141,46 @@ public class ProductDao extends DBConnect implements Dao<Product> {
         }
         return flag;
     }
+    
+    public int getTotalRecords() {
+        int total = 0;
+        String sql = "SELECT COUNT(*) FROM Products";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()) {
+                total = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return total;
+    }
+
+    public List<Product> getListProduct(int page, int pageSize) {
+        List<Product> products = new ArrayList<>();
+        int startRecord = (page - 1) * pageSize;
+        String sql = "SELECT * FROM Products ORDER BY product_id OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, startRecord);
+            ps.setInt(2, pageSize);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                Product p = new Product(rs.getInt("product_id"), 
+                        rs.getString("name"), 
+                        rs.getDouble("price"),
+                        rs.getInt("quantity"), 
+                        rs.getString("description"), 
+                        rs.getString("image"), 
+                        cd.findCategoryById(rs.getInt("category_id")), 
+                        bd.findBrandById(rs.getInt("brand_id")));
+                products.add(p);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return  products;
+    }
 
 }

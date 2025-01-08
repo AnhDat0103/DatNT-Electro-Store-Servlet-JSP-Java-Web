@@ -61,14 +61,32 @@
                                                 <td ><fmt:formatNumber type="number">${p.price}</fmt:formatNumber> đ</td>
                                                     <td>
                                                         <a href="/electro-store/admin/chi-tiet-san-pham?ma-san-pham=${p.id}" class="btn btn-info">Xem chi tiết</a>
-                                                        <a href="/electro-store/admin/cap-nhat-thong-tin-san-pham?ma-san-pham=${p.id}" class="btn btn-warning">Cập nhật</a>
-                                                        <a href="/electro-store/admin/xac-nhan-xoa-san-pham?ma-san-pham=${p.id}" class="btn btn-danger">Xóa sản phẩm</a>
-                                                    </td>
-                                                </tr>
+                                                    <a href="/electro-store/admin/cap-nhat-thong-tin-san-pham?ma-san-pham=${p.id}" class="btn btn-warning">Cập nhật</a>
+                                                    <a href="/electro-store/admin/xac-nhan-xoa-san-pham?ma-san-pham=${p.id}" class="btn btn-danger">Xóa sản phẩm</a>
+                                                </td>
+                                            </tr>
                                         </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
+                            <nav aria-label="...">
+                                <ul class="pagination justify-content-center">
+                                    <c:if test="${currentPage != 1}">
+                                        <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
+                                        <a class="page-link" href="/electro-store/admin/quan-ly-hang-hoa?trang-so=${requestScope.currentPage - 1}">Trước</a>
+                                    </li>
+                                    </c:if>
+                                    <c:forEach begin="1" end="${requestScope.totalPages}" var="i">
+                                        <li class="page-item"><a class="page-link ${currentPage eq i ? 'active': ''}" href="/electro-store/admin/quan-ly-hang-hoa?trang-so=${i}">${i}</a></li>
+                                        </c:forEach>
+                                        <c:if test="${currentPage lt totalPages}">
+                                        <li class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
+                                            <a class="page-link" href="/electro-store/admin/quan-ly-hang-hoa?trang-so=${requestScope.currentPage + 1}">Sau</a>
+                                        </li>
+                                    </c:if>
+
+                                </ul>
+                            </nav>
                         </div>
                     </div>
                 </main>

@@ -22,6 +22,8 @@ import model.Product;
  */
 @WebServlet(name="ProductServlet", urlPatterns={"/admin/quan-ly-hang-hoa"})
 public class ProductServlet extends HttpServlet {
+    
+    private final ProductDao pd = new ProductDao();
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -58,12 +60,22 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        ProductDao pd = new ProductDao();
-        List<Product> products = pd.findAll();
+        int page = 1;
+        int pageSize = 10;
+        
+        String pageRequest = request.getParameter("trang-so");
+        if(pageRequest != null) {
+            page = Integer.parseInt(pageRequest);
+        }
+        int totalRecords = pd.getTotalRecords();
+        int totalPages = (int) Math.ceil((double) totalRecords / pageSize);
+        List<Product> products = pd.getListProduct(page, pageSize);
         if(products.isEmpty()) {
             request.setAttribute("errorMessage", "Không có sản phẩm nào trong kho");
         }else{
             request.setAttribute("products", products);
+            request.setAttribute("currentPage", page);
+            request.setAttribute("totalPages", totalPages);
         }
         request.getRequestDispatcher("/dashboard/product/show.jsp").forward(request, response);
     } 
