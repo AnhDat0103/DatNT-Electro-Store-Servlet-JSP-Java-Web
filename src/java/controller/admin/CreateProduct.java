@@ -118,10 +118,10 @@ public class CreateProduct extends HttpServlet {
             }
 
             if (priceRequest.isEmpty()) {
-                request.setAttribute("emptyError", "không được để trống.");
+                request.setAttribute("priceError", "không được để trống.");
             }
             if (quantityRequest.isEmpty()) {
-                request.setAttribute("emptyError", "không được để trống.");
+                request.setAttribute("quantityError", "không được để trống.");
             }
             if (image == null || image.isEmpty()) {
                 request.setAttribute("imgError", "Ảnh sản phẩm không thể để trống.");
@@ -130,7 +130,7 @@ public class CreateProduct extends HttpServlet {
             request.getRequestDispatcher("/dashboard/product/create.jsp").forward(request, response);
 
         } else {
-            double price = MyLibrary.convertStringToDouble(priceRequest);
+            double price = getPrice(priceRequest);
             int quantity = MyLibrary.convertStringToInteger(quantityRequest);
             int brandId = MyLibrary.convertStringToInteger(brandRequest);
             if (price > 0 && quantity > 0) {
@@ -144,8 +144,7 @@ public class CreateProduct extends HttpServlet {
                 p.setCategory(cd.findCategoryById(categoryId));
                 p.setImage(image);
                 pd.save(p);
-                request.setAttribute("successMessage", "Sản phẩm đã được tạo thành công.");
-                request.getRequestDispatcher("/dashboard/product/create.jsp").forward(request, response);
+                response.sendRedirect("/electro-store/admin/quan-ly-hang-hoa");
             } else {
                 if (price <= 0) {
                     request.setAttribute("errorPrice", "Số tiền phải lớn hơn 0đ.");
@@ -212,6 +211,17 @@ public class CreateProduct extends HttpServlet {
             }
         }
         return null;
+    }
+    
+     public double getPrice(String priceRequest) {
+        double price;
+        try {
+            priceRequest = priceRequest.replace(".", "");
+            price = Double.parseDouble(priceRequest);
+        } catch (NumberFormatException e) {
+            price = 0;
+        }
+        return price;
     }
 
 }

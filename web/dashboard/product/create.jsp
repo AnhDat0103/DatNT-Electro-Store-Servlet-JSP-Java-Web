@@ -64,10 +64,10 @@
                                                 <div class="row mb-3">
                                                     <div class="col">
                                                         <label class="form-label">Giá cả (VNĐ):</label>
-                                                        <input type="number" class="form-control ${not empty emptyError ? 'is-invalid' : ''} ${not empty errorPrice ? 'is-invalid' : ''}" name="price">
-                                                        <c:if test="${not empty emptyError}">
+                                                        <input type="number" class="form-control ${not empty priceError ? 'is-invalid' : ''} ${not empty errorPrice ? 'is-invalid' : ''}" name="price">
+                                                        <c:if test="${not empty priceError}">
                                                             <div class="invalid-feedback">
-                                                                <c:out value="${emptyError}" />
+                                                                <c:out value="${priceError}" />
                                                             </div>
                                                         </c:if>
                                                         <c:if test="${not empty errorPrice}">
@@ -78,10 +78,10 @@
                                                     </div>
                                                     <div class="col">
                                                         <label class="form-label">Số lượng:</label>
-                                                        <input type="number" class="form-control ${not empty emptyError ? 'is-invalid' : ''} ${not empty errorQuantity ? 'is-invalid' : ''}" name="quantity">
-                                                        <c:if test="${not empty emptyError}">
+                                                        <input type="number" class="form-control ${not empty quantityError ? 'is-invalid' : ''} ${not empty errorQuantity ? 'is-invalid' : ''}" name="quantity">
+                                                        <c:if test="${not empty quantityError}">
                                                             <div class="invalid-feedback">
-                                                                <c:out value="${emptyError}" />
+                                                                <c:out value="${quantityError}" />
                                                             </div>
                                                         </c:if>
                                                         <c:if test="${not empty errorQuantity}">
@@ -140,8 +140,7 @@
                                                 <div class="col-12 mb-3 d-flex justify-content-center">
                                                     <img style="max-height: 250px; display: none;" alt="avatar preview"
                                                          id="avatarPreview" />
-                                                </div>
-                                                <div style="color:green;">${requestScope.successMessage}</div>
+                                                </div> 
                                                 <div class="d-flex justify-content-between">
                                                     <input class="btn btn-primary" type="submit" value="Tạo sản phẩm" formenctype="multipart/form-data" >
                                                     <a class="btn btn-secondary" href="http://localhost:8080/electro-store/admin/quan-ly-hang-hoa" role="button">Hủy bỏ</a>
@@ -160,11 +159,6 @@
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="../resources/admin/js/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="../resources/admin/assets/demo/chart-area-demo.js"></script>
-        <script src="../resources/admin/assets/demo/chart-bar-demo.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-        <script src="../resources/admin/js/datatables-simple-demo.js"></script>
     </body>
 </html>
 
