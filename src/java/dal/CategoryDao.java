@@ -27,7 +27,7 @@ public class CategoryDao extends DBConnect implements Dao<Category>{
     }
 
     @Override
-    public void update(Category t) {
+    public int update(Category t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

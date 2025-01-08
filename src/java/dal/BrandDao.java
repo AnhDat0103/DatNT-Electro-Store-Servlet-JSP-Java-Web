@@ -40,7 +40,7 @@ public class BrandDao extends DBConnect implements Dao<Brand> {
     }
 
     @Override
-    public void update(Brand t) {
+    public int update(Brand t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

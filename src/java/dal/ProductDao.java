@@ -16,7 +16,7 @@ import model.Product;
  * @author DAT
  */
 public class ProductDao extends DBConnect implements Dao<Product> {
-    
+
     private CategoryDao cd = new CategoryDao();
     private BrandDao bd = new BrandDao();
 
@@ -73,8 +73,33 @@ public class ProductDao extends DBConnect implements Dao<Product> {
     }
 
     @Override
-    public void update(Product t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public int update(Product t) {
+        String sql = "UPDATE [dbo].[Products]\n"
+                + "   SET [name] = ?\n"
+                + "      ,[price] = ?\n"
+                + "      ,[quantity] = ?\n"
+                + "      ,[category_id] = ?\n"
+                + "      ,[brand_id] = ?\n"
+                + "      ,[description] = ?\n"
+                + "      ,[image] = ?\n"
+                + " WHERE product_id = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, t.getName());
+            ps.setDouble(2, t.getPrice());
+            ps.setInt(3, t.getQuantity());
+            ps.setInt(4, t.getCategory().getId());
+            ps.setInt(5, t.getBrand().getId());
+            ps.setString(6, t.getDescription());
+            ps.setString(7, t.getImage());
+            ps.setInt(8, t.getId());
+            int rs = ps.executeUpdate();
+            return rs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+        
     }
 
     @Override
@@ -88,13 +113,13 @@ public class ProductDao extends DBConnect implements Dao<Product> {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, productId);
             ResultSet rs = ps.executeQuery();
-            if(rs.next()) {
+            if (rs.next()) {
                 Product p = new Product(rs.getInt("product_id"), rs.getString("name"),
-                        rs.getDouble("price"), rs.getInt("quantity"), 
-                        rs.getString("description"), rs.getString("image"), 
+                        rs.getDouble("price"), rs.getInt("quantity"),
+                        rs.getString("description"), rs.getString("image"),
                         cd.findCategoryById(rs.getInt("category_id")),
                         bd.findBrandById(rs.getInt("brand_id"))
-                        );
+                );
                 return p;
             }
         } catch (SQLException e) {
@@ -109,7 +134,7 @@ public class ProductDao extends DBConnect implements Dao<Product> {
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, productId);
-            int rowsAffected  = ps.executeUpdate();
+            int rowsAffected = ps.executeUpdate();
             return rowsAffected > 0;
         } catch (SQLException e) {
             flag = false;

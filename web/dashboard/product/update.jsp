@@ -26,7 +26,6 @@
                 avatarFile.change(function (e) {
                     const imgURL = URL.createObjectURL(e.target.files[0]);
                     $("#avatarPreview").attr("src", imgURL);
-                    $("#avatarPreview").css({"display": "block"});
                 });
             });
             $(document).ready(() => {
@@ -53,7 +52,7 @@
                             <div class="alert alert-danger" role="alert">
                                 ${requestScope.error}
                             </div>
-                        </c:if>s
+                        </c:if>
                         <div class="container">
                             <c:if test="${not empty p}">
                                 <div class="row justify-content-center">
@@ -61,8 +60,11 @@
                                         <div class="card border-1 rounded-lg mt-5">
                                             <div class="card-body">
                                                 <form action="/electro-store/admin/cap-nhat-thong-tin-san-pham" method="POST" enctype="multipart/form-data">
+                                                    <div class="mb-3 col-12 col-md-6" style="display: none;"> 
+                                                        <label for="inputId" class="form-label">ID:</label>       
+                                                        <input type="text" class="form-control" id="id"  name="id" value="${requestScope.p.id}">
+                                                    </div>
                                                     <div class="mb-3">
-                                                        <input type="hidden" class="form-control" id="id" value="${requestScope.p.id}">
                                                         <label for="exampleFormControlInput1" class="form-label">Tên sản phẩm:</label>
                                                         <input type="text" class="form-control ${not empty nameError ? 'is-invalid' : ''}" id="exampleFormControlInput1" name="name" value="${requestScope.p.name}">
                                                         <c:if test="${not empty nameError}">
@@ -73,12 +75,11 @@
                                                     </div>
                                                     <div class="row mb-3">
                                                         <div class="col">
-
                                                             <label class="form-label">Giá cả (VNĐ):</label>                                               
-                                                            <input type="text" class="form-control ${not empty emptyError ? 'is-invalid' : ''} ${not empty errorPrice ? 'is-invalid' : ''}" name="price" value="<fmt:formatNumber value='${requestScope.p.price}' type='number'/>" />
-                                                            <c:if test="${not empty emptyError}">
+                                                            <input type="text" class="form-control ${not empty priceError ? 'is-invalid' : ''} ${not empty errorPrice ? 'is-invalid' : ''}" name="price" value="<fmt:formatNumber value='${requestScope.p.price}'/>" />
+                                                            <c:if test="${not empty priceError}">
                                                                 <div class="invalid-feedback">
-                                                                    <c:out value="${emptyError}" />
+                                                                    <c:out value="${priceError}" />
                                                                 </div>
                                                             </c:if>
                                                             <c:if test="${not empty errorPrice}">
@@ -89,10 +90,10 @@
                                                         </div>
                                                         <div class="col">
                                                             <label class="form-label">Số lượng:</label>
-                                                            <input type="number" class="form-control ${not empty emptyError ? 'is-invalid' : ''} ${not empty errorQuantity ? 'is-invalid' : ''}" name="quantity" value="${requestScope.p.quantity}">
-                                                            <c:if test="${not empty emptyError}">
+                                                            <input type="number" class="form-control ${not empty quantityError ? 'is-invalid' : ''} ${not empty errorQuantity ? 'is-invalid' : ''}" name="quantity" value="${requestScope.p.quantity}">
+                                                            <c:if test="${not empty quantityError}">
                                                                 <div class="invalid-feedback">
-                                                                    <c:out value="${emptyError}" />
+                                                                    <c:out value="${quantityError}" />
                                                                 </div>
                                                             </c:if>
                                                             <c:if test="${not empty errorQuantity}">
@@ -122,7 +123,7 @@
                                                             <label class="form-label">Hãng sản phẩm:</label>
                                                             <select class="form-select" aria-label="Default select example" name="brand">
                                                                 <c:forEach items="${sessionScope.brands}" var="brand">
-                                                                    <option value="${brand.id}" >${brand.name}</option>
+                                                                    <option value="${brand.id}" ${requestScope.brand.id == brand.id ? 'selected' : '' } >${brand.name}</option>
                                                                 </c:forEach>
                                                             </select>
                                                         </div>
@@ -130,15 +131,15 @@
                                                             <label class="form-label">Loại sản phẩm:</label>
                                                             <div class="mt-1">
                                                                 <div class="form-check form-check-inline">
-                                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked    >
+                                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" ${requestScope.category.id == 1 ? 'checked' : '' }>
                                                                     <label class="form-check-label" for="inlineRadio1">Laptop</label>
                                                                 </div>
                                                                 <div class="form-check form-check-inline">
-                                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" ${requestScope.category.id == 2 ? 'checked' : '' }>
                                                                     <label class="form-check-label" for="inlineRadio2">Máy ảnh</label>
                                                                 </div>
                                                                 <div class="form-check form-check-inline">
-                                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" >
+                                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" ${requestScope.category.id == 3 ? 'checked' : '' }>
                                                                     <label class="form-check-label" for="inlineRadio3">Phụ kiện</label>
                                                                 </div>
                                                             </div>
@@ -147,18 +148,14 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="formFile" class="form-label">Ảnh sản phẩm:</label>
-                                                        <input class="form-control ${not empty imgError ? 'is-invalid' : ''}" type="file"  id="avatarFile"  accept=".png, .jpg, .jpeg" name="fileImage" >
-                                                        <c:if test="${not empty imgError}">
-                                                            <div class="invalid-feedback">
-                                                                <c:out value="${imgError}" />
-                                                            </div>
-                                                        </c:if>
+                                                        <input class="form-control" type="file"  id="avatarFile"  accept=".png, .jpg, .jpeg" name="fileImage" >
+
                                                     </div>
                                                     <div class="col-12 mb-3 d-flex justify-content-center">
-                                                        <img src="../resources/admin/img/${requestScope.p.image}" style="max-height: 250px; display: block;" alt="avatar preview"
+                                                        <img src="../resources/admin/img/${requestScope.image}" style="max-height: 250px;" alt="avatar preview"
                                                              id="avatarPreview" />
                                                     </div>
-                                                    <div style="color:green;">${requestScope.successMessage}</div>
+
                                                     <div class="d-flex justify-content-between">
                                                         <input class="btn btn-primary" type="submit" value="Cập nhật sản phẩm" formenctype="multipart/form-data" >
                                                         <a class="btn btn-secondary" href="http://localhost:8080/electro-store/admin/quan-ly-hang-hoa" role="button">Hủy bỏ</a>
@@ -178,11 +175,6 @@
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="../resources/admin/js/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="../resources/admin/assets/demo/chart-area-demo.js"></script>
-        <script src="../resources/admin/assets/demo/chart-bar-demo.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-        <script src="../resources/admin/js/datatables-simple-demo.js"></script>
     </body>
 </html>
 

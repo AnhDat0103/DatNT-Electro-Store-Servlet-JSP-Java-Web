@@ -102,7 +102,7 @@ public class UserDao extends DBConnect implements Dao<User> {
     }
 
     @Override
-    public void update(User t) {
+    public int update(User t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

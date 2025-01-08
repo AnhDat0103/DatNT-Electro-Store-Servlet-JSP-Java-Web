@@ -18,7 +18,7 @@ public interface Dao <T> {
     
     public List<T> findAll();
     
-    public void update(T t);
+    public int update(T t);
     
     public void delete(T t);
     
