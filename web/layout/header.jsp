@@ -51,7 +51,7 @@
                 <!-- LOGO -->
                 <div class="col-md-6">
                     <div class="header-logo">
-                        <a href="#" class="logo">
+                        <a href="/electro-store" class="logo">
                             <img src="./resources/client/img/logo.png" alt="">
                         </a>
                     </div>
