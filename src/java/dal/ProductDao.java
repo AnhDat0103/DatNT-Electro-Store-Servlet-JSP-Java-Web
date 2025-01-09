@@ -156,6 +156,22 @@ public class ProductDao extends DBConnect implements Dao<Product> {
         }
         return total;
     }
+    
+    public int getTotalRecordsByCategory(int category) {
+        int total = 0;
+        String sql = "SELECT COUNT(*) FROM Products WHERE category_id = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, category);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()) {
+                total = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return total;
+    }
 
     public List<Product> getListProduct(int page, int pageSize) {
         List<Product> products = new ArrayList<>();
@@ -181,6 +197,33 @@ public class ProductDao extends DBConnect implements Dao<Product> {
             e.printStackTrace();
         }
         return  products;
+    }
+
+    public List<Product> showProductsByCategogy(int category, int page, int pagesize) {
+        List<Product> products = new ArrayList<>();
+        int startPage = (page - 1) * pagesize;
+        String sql = "SELECT * FROM Products WHERE category_id = ? ORDER BY product_id OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, category);
+            ps.setInt(2, startPage);
+            ps.setInt(3, pagesize);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                Product p = new Product(rs.getInt("product_id"), 
+                        rs.getString("name"), 
+                        rs.getDouble("price"),
+                        rs.getInt("quantity"), 
+                        rs.getString("description"), 
+                        rs.getString("image"), 
+                        cd.findCategoryById(rs.getInt("category_id")), 
+                        bd.findBrandById(rs.getInt("brand_id")));
+                products.add(p);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return products;
     }
 
 }

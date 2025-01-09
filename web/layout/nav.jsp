@@ -14,9 +14,9 @@
 					<ul class="main-nav nav navbar-nav">
 						<li class="active"><a href="#">Trang chủ</a></li>
 						<li><a href="#">Bán Chạy</a></li>
-						<li><a href="/electro-store/kho-hang">Laptops</a></li>
-						<li><a href="/electro-store/kho-hang">Máy ảnh</a></li>
-						<li><a href="/electro-store/kho-hang">Phụ kiện</a></li>
+						<li><a href="/electro-store/kho-hang?action=laptop">Laptops</a></li>
+						<li><a href="/electro-store/kho-hang?action=may-anh">Máy ảnh</a></li>
+						<li><a href="/electro-store/kho-hang?action=phu-kien">Phụ kiện</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
