@@ -18,7 +18,7 @@
 							</div>
 							<div class="shop-body">
 								<h3>Khu vực<br>Laptop</h3>
-								<a href="/electro-store/kho-hang" class="cta-btn">Mua sắm <i class="fa fa-arrow-circle-right"></i></a>
+								<a href="/electro-store/kho-hang?action=laptop" class="cta-btn">Mua sắm <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>
@@ -32,7 +32,7 @@
 							</div>
 							<div class="shop-body">
 								<h3>Khu vực<br>Phụ kiện</h3>
-								<a href="/electro-store/kho-hang" class="cta-btn">Mua sắm <i class="fa fa-arrow-circle-right"></i></a>
+								<a href="/electro-store/kho-hang?action=phu-kien"" class="cta-btn">Mua sắm <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>
@@ -46,7 +46,7 @@
 							</div>
 							<div class="shop-body">
 								<h3>Khu vực<br>Máy ảnh</h3>
-								<a href="/electro-store/kho-hang" class="cta-btn">Mua sắm <i class="fa fa-arrow-circle-right"></i></a>
+								<a href="/electro-store/kho-hang?action=may-anh" class="cta-btn">Mua sắm <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>

@@ -199,6 +199,11 @@
 
                         <!-- store products -->
                         <div class="row">
+                            <c:if test="${not empty errorMessage}">
+                                <div class="alert alert-danger" role="alert">
+                                    ${errorMessage}
+                                </div>
+                            </c:if>
                             <c:forEach items="${products}" var="product" varStatus="status">
                                 <div class="col-md-4">
                                     <div class="product">

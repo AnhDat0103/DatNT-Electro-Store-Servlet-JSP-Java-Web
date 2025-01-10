@@ -12,6 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 import model.Product;
 
@@ -62,44 +63,51 @@ public class ShowProductLocation extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String categoryRequest = request.getParameter("action");
+        String categoryRequest = request.getParameter("action") != null ? request.getParameter("action") : "";
         String pageRequest = request.getParameter("trang-so");
         int category = 0;
         int page = 1;
         int pageSize = 6;
+        int totalRecords;
+        List<Product> products = new ArrayList<>();
 
         if (pageRequest != null) {
             page = Integer.parseInt(pageRequest);
         }
-        switch (categoryRequest) {
-            case "laptop" ->
-                category = 1;
-            case "may-anh" ->
-                category = 2;
-            case "phu-kien" ->
-                category = 3;
+
+        if (categoryRequest.isEmpty()) {
+            products = pd.getListProduct(page, pageSize);
+            totalRecords = pd.getTotalRecords();
+        } else {
+            switch (categoryRequest) {
+                case "laptop" ->
+                    category = 1;
+                case "may-anh" ->
+                    category = 2;
+                case "phu-kien" ->
+                    category = 3;
+            }
+            totalRecords = pd.getTotalRecordsByCategory(category);
+            products = pd.showProductsByCategogy(category, page, pageSize);
+
         }
 
-        int totalRecords = pd.getTotalRecordsByCategory(category);
         int totalPages = (int) Math.ceil((double) totalRecords / pageSize);
 
         if (page > totalPages) {
-            response.sendRedirect("/electro-store/kho-hang?action=" + categoryRequest + "&trang-so=" + totalPages);
-            return;
+            page = totalPages;
         }
-        if (category > 0) {
-            List<Product> products = pd.showProductsByCategogy(category, page, pageSize);
-            if (products.isEmpty()) {
-                request.setAttribute("errorMessage", "Không có sản phẩm nào trong kho");
-            } else {
-                request.setAttribute("action", categoryRequest);
-                request.setAttribute("products", products);
-                request.setAttribute("currentPage", page);
-                request.setAttribute("totalPages", totalPages);
-            }
-        }
-        request.getRequestDispatcher("laptop_location.jsp").forward(request, response);
 
+        if (products.isEmpty()) {
+            request.setAttribute("errorMessage", "Không có sản phẩm nào trong kho");
+        } else {
+            request.setAttribute("action", categoryRequest);
+            request.setAttribute("products", products);
+            request.setAttribute("currentPage", page);
+            request.setAttribute("totalPages", totalPages);
+        }
+
+        request.getRequestDispatcher("laptop_location.jsp").forward(request, response);
     }
 
     /**

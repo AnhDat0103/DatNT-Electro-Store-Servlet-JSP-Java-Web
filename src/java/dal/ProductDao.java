@@ -226,4 +226,28 @@ public class ProductDao extends DBConnect implements Dao<Product> {
         return products;
     }
 
+    public List<Product> getTopNewProduct(int topRows) {
+        List<Product> products = new ArrayList<>();
+        String sql = "SELECT TOP(?) * FROM  Products ORDER BY Product_id DESC";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, topRows);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                Product p = new Product(rs.getInt("product_id"), 
+                        rs.getString("name"), 
+                        rs.getDouble("price"),
+                        rs.getInt("quantity"), 
+                        rs.getString("description"), 
+                        rs.getString("image"), 
+                        cd.findCategoryById(rs.getInt("category_id")), 
+                        bd.findBrandById(rs.getInt("brand_id")));
+                products.add(p);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return products;
+    }
+
 }

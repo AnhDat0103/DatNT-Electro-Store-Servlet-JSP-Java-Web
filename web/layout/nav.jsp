@@ -12,7 +12,7 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="#">Trang chủ</a></li>
+						<li class="active"><a href="/electro-store">Trang chủ</a></li>
 						<li><a href="#">Bán Chạy</a></li>
 						<li><a href="/electro-store/kho-hang?action=laptop">Laptops</a></li>
 						<li><a href="/electro-store/kho-hang?action=may-anh">Máy ảnh</a></li>
