@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-        <title>Electro - HTML Ecommerce Template</title>
+        <title>Kho hàng - Electro store</title>
 
         <!-- Google font -->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -212,7 +212,7 @@
                                         </div>
                                         <div class="product-body">
                                             <p class="product-category">${product.category.name}</p>
-                                            <h3 class="product-name"><a href="#">${product.name}</a></h3>
+                                            <h3 class="product-name"><a href="/electro-store/chi-tiet-san-pham?ma-san-pham=${product.id}">${product.name}</a></h3>
                                             <h4 class="product-price"><fmt:formatNumber value="${product.price}" type="number"/> đ</h4>
                                             <!--<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>-->
                                             <div class="product-rating">
