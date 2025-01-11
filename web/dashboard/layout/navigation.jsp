@@ -28,10 +28,6 @@
                                 Đơn hàng
                             </a>
                             <a class="nav-link" href="#">
-                                <div class="sb-nav-link-icon"><i class="fa-solid fa-list"></i></i></div>
-                                Mặt hàng
-                            </a>
-                            <a class="nav-link" href="#">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-money-bill"></i></div>
                                 Khuyến mãi
                             </a>

@@ -20,6 +20,6 @@ public interface Dao <T> {
     
     public int update(T t);
     
-    public void delete(T t);
+    public int delete(int t);
     
 }

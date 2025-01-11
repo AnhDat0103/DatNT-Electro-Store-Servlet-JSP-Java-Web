@@ -103,7 +103,7 @@ public class ProductDao extends DBConnect implements Dao<Product> {
     }
 
     @Override
-    public void delete(Product t) {
+    public int delete(int t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

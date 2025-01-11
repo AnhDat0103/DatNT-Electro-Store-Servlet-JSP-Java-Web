@@ -107,8 +107,18 @@ public class UserDao extends DBConnect implements Dao<User> {
     }
 
     @Override
-    public void delete(User t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public int delete(int id) {
+        int rowsAffected;
+        String sql = "DELETE FROM Users WHERE user_id = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            rowsAffected = ps.executeUpdate();
+            return rowsAffected;
+        } catch (SQLException e) {
+            rowsAffected = 0;
+        }
+        return rowsAffected;
     }
     
     public User findUserByEmailAndPassword(String email, String password){
@@ -199,6 +209,28 @@ public class UserDao extends DBConnect implements Dao<User> {
             e.printStackTrace();
         }
         return  users;
+    }
+
+    public User findUserById(int parseInt) {
+        String sql = "SELECT * FROM Users WHERE user_id = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, parseInt);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()) {
+                User u = new User(rs.getInt("user_id"), 
+                        rs.getString("full_name"), 
+                        rs.getString("email"), 
+                        rs.getString("password"), 
+                        rs.getString("telephone"), 
+                        rs.getString("address"), 
+                        roleDao.findRoleById(rs.getInt("role_id")));
+                return u;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

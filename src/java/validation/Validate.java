@@ -38,7 +38,7 @@ public class Validate {
         try {
             b = Integer.parseInt(a);
         } catch (NumberFormatException e) {
-            b = 0;
+            b = -1;
         }
         return b;
     }

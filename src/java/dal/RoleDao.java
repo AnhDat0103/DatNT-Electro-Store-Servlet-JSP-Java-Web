@@ -32,7 +32,7 @@ public class RoleDao extends DBConnect implements Dao<Role>{
     }
 
     @Override
-    public void delete(Role t) {
+    public int delete(int t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

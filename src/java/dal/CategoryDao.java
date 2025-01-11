@@ -32,7 +32,7 @@ public class CategoryDao extends DBConnect implements Dao<Category>{
     }
 
     @Override
-    public void delete(Category t) {
+    public int delete(int t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
