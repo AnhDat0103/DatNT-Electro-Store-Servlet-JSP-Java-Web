@@ -103,7 +103,20 @@ public class UserDao extends DBConnect implements Dao<User> {
 
     @Override
     public int update(User t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int rowAffected;
+        String sql = "UPDATE Users SET full_name = ?, telephone = ? , address = ? WHERE user_id = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, t.getFullName());
+            ps.setString(2, t.getTelephone());
+            ps.setString(3, t.getAddress());
+            ps.setInt(4, t.getUserId());
+            rowAffected = ps.executeUpdate();
+            return rowAffected;
+        } catch (SQLException e) {
+            rowAffected = 0;
+        }
+        return rowAffected;
     }
 
     @Override
