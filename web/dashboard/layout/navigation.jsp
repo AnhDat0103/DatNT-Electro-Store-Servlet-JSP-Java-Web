@@ -19,7 +19,7 @@
                                 <div class="sb-nav-link-icon"><i class="fa-brands fa-product-hunt"></i></div>
                                 Sản phẩm
                             </a>
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="/electro-store/admin/quan-ly-khach-hang">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-person"></i></div>
                                 khách hàng
                             </a>

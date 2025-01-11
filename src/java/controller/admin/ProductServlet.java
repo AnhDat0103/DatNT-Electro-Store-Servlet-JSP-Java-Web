@@ -65,10 +65,13 @@ public class ProductServlet extends HttpServlet {
         
         String pageRequest = request.getParameter("trang-so");
         if(pageRequest != null) {
-            page = Integer.parseInt(pageRequest);
+            page = validation.Validate.getInteger(pageRequest);
         }
         int totalRecords = pd.getTotalRecords();
         int totalPages = (int) Math.ceil((double) totalRecords / pageSize);
+        if(page > totalPages || page <= 0) {
+            page = totalPages;
+        }
         List<Product> products = pd.getListProduct(page, pageSize);
         if(products.isEmpty()) {
             request.setAttribute("errorMessage", "Không có sản phẩm nào trong kho");

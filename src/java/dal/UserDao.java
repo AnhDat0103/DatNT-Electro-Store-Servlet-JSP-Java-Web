@@ -159,4 +159,46 @@ public class UserDao extends DBConnect implements Dao<User> {
         return null;
     }
 
+    public int getTotalRecords() {
+        int totalRecords = 0;
+        String sql  = "SELECT COUNT(*) FROM Users WHERE role_id = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, 2);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()) {
+                totalRecords = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalRecords;
+    }
+
+    public List<User> getListUsers(int page, int pageSize) {
+        List<User> users = new ArrayList<>();
+        int startRecord = (page - 1) * pageSize;
+        String sql = "SELECT * FROM Users WHERE role_id = ? ORDER BY user_id OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, 2);
+            ps.setInt(2, startRecord);
+            ps.setInt(3, pageSize);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                User u = new User(rs.getInt("user_id"), 
+                        rs.getString("full_name"), 
+                        rs.getString("email"), 
+                        rs.getString("password"), 
+                        rs.getString("telephone"), 
+                        rs.getString("address"), 
+                        roleDao.findRoleById(rs.getInt("role_id")));
+                users.add(u);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return  users;
+    }
+
 }

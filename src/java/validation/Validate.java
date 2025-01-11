@@ -5,8 +5,6 @@
 package validation;
 
 import dal.UserDao;
-import java.util.List;
-import model.User;
 
 /**
  *
@@ -33,6 +31,16 @@ public class Validate {
     
     public static boolean emailIsExist(String emailRequest){
         return userDao.findUserByEmail(emailRequest) != null;
+    }
+    
+    public static int getInteger(String a) {
+        int b;
+        try {
+            b = Integer.parseInt(a);
+        } catch (NumberFormatException e) {
+            b = 0;
+        }
+        return b;
     }
     
 }

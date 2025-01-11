@@ -3,27 +3,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.admin;
+package controller.admin.user;
 
 import dal.UserDao;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 import model.User;
 
 /**
  *
  * @author DAT
  */
-@WebServlet(name="UserServlet", urlPatterns={"/danh-sach-khach-hang"})
+@WebServlet(name="UserServlet", urlPatterns={"/admin/quan-ly-khach-hang"})
 public class UserServlet extends HttpServlet {
+    
+    private final UserDao ud = new UserDao();
    
-     private final UserDao userDao = new UserDao();
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -59,15 +60,27 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        List<User> users = userDao.findAll();
-        String ms = null;
-        if(users == null) {
-            ms = "danh sach trong";
+        int page = 1;
+        int pageSize = 10;
+        
+        String pageRequest = request.getParameter("trang-so");
+        if(pageRequest != null) {
+            page = validation.Validate.getInteger(pageRequest);
         }
-        request.setAttribute("ms", ms);
-        request.setAttribute("users", users);
-        request.getRequestDispatcher("danhsachkhachang.jsp").forward(request, response);
-       
+        int totalRecords = ud.getTotalRecords();
+        int totalPages = (int) Math.ceil((double) totalRecords / pageSize);
+        if(page > totalPages || page <= 0) {
+            page = totalPages;
+        }
+        List<User> users = ud.getListUsers(page, pageSize);
+        if(users.isEmpty()) {
+            request.setAttribute("errorMessage", "Không có dữ liệu về khách hàng");
+        }else{
+            request.setAttribute("users", users);
+            request.setAttribute("currentPage", page);
+            request.setAttribute("totalPages", totalPages);
+        }
+        request.getRequestDispatcher("/dashboard/user/show.jsp").forward(request, response);
     } 
 
     /** 
