@@ -79,6 +79,7 @@ public class Login extends HttpServlet {
         if(currentUser != null){
             request.setAttribute("user", currentUser);
             session.setAttribute("currentUser", currentUser);
+            session.setAttribute("role", currentUser.getRole().getName());
             request.getRequestDispatcher("homepage.jsp").forward(request, response);
         } else {
             request.setAttribute("errorMessage", "Tài khoản hoặc mật khẩu không chính xác!");

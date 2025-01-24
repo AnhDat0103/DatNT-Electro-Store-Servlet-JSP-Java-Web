@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author DAT
  */
-@WebServlet(name="Show404Page", urlPatterns={"/admin/404"})
+@WebServlet(name="Show404Page", urlPatterns={"/404"})
 public class Show404Page extends HttpServlet {
    
     /** 
@@ -55,7 +55,7 @@ public class Show404Page extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("/dashboard/error/404.jsp").forward(request, response);
+        request.getRequestDispatcher("dashboard/error/404.jsp").forward(request, response);
     } 
 
     /** 

@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author DAT
  */
-@WebServlet(name="Show500Page", urlPatterns={"/admin/500"})
+@WebServlet(name="Show500Page", urlPatterns={"/500"})
 public class Show500Page extends HttpServlet {
    
     /** 
@@ -55,7 +55,7 @@ public class Show500Page extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("/dashboard/error/500.jsp").forward(request, response);
+        request.getRequestDispatcher("dashboard/error/500.jsp").forward(request, response);
     } 
 
     /** 
